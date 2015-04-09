@@ -14,7 +14,7 @@ public class NeuralNetworkTopologyOptimizer {
   private static final double LEARNING_RATE_MAX = 1;
   
   static final int GENERATIONS = 100;
-  private static final int GENERATION_SIZE = 7 * 2;
+  private static final int GENERATION_SIZE = 2;
   
   private static final int INPUT_NEURONS = GestureStore.INPUT_NEURONS;
   private static final int OUTPUT_NEURONS = GestureStore.OUTPUT_NEURONS;

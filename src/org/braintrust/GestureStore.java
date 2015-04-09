@@ -91,6 +91,8 @@ public class GestureStore {
         }
       }
     }
+    
+    normalizeGestures();
   }
 
   public Gesture getRandomTrainingGesture() {
@@ -107,6 +109,38 @@ public class GestureStore {
   
   public ArrayList<Gesture> getAllTrainingGestures() {
     return gestures.get(DataType.TRAINING);
+  }
+  
+  public static double maxInputValue = 0;
+  private void normalizeGestures() {
+      //public final Map<DataType, ArrayList<Gesture>> gestures = new EnumMap<>(DataType.class);
+      for (Gesture gesture : getAllTrainingGestures()) {
+          for (int i = 0; i < gesture.input.length; i++) {
+              if (gesture.input[i] > maxInputValue) {
+                  maxInputValue = gesture.input[i];
+              }
+          }
+      }
+      
+      for (Gesture gesture : getAllTestingGestures()) {
+          for (int i = 0; i < gesture.input.length; i++) {
+              if (gesture.input[i] > maxInputValue) {
+                  maxInputValue = gesture.input[i];
+              }
+          }
+      }
+      
+      for (Gesture gesture : getAllTrainingGestures()) {
+          for (int i = 0; i < gesture.input.length; i++) {
+            gesture.input[i] /= maxInputValue;
+          }
+      }
+      
+      for (Gesture gesture : getAllTestingGestures()) {
+          for (int i = 0; i < gesture.input.length; i++) {
+              gesture.input[i] /= maxInputValue;
+          }
+      }
   }
 
 }
