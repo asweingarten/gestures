@@ -130,6 +130,8 @@ public class GestureStore {
           }
       }
       
+      System.out.println("Max input value: " + maxInputValue);
+      
       for (Gesture gesture : getAllTrainingGestures()) {
           for (int i = 0; i < gesture.input.length; i++) {
             gesture.input[i] /= maxInputValue;
