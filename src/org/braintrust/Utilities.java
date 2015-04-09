@@ -31,7 +31,7 @@ public class Utilities {
     double seed = Math.random() * probabilitiesSum;
     
     for (int i = 0; seed > 0 && i < values.size(); i++) {
-      assert(probabilities.get(i) > 0);
+      assert(probabilities.get(i) >= 0);
       seed -= probabilities.get(i);
       
       if (seed <= 0) {
