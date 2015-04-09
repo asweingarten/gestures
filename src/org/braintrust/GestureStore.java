@@ -35,7 +35,7 @@ public class GestureStore {
 
   public static final String[] SENSORS = new String[]{"acc"}; // "gyroscope", "orientation" "rotation"
 
-  public static final int TRIM_LENGTH = 450;
+  public static final int TRIM_LENGTH = 520;
   
   public static final int INPUT_NEURONS = SENSORS.length * 3 * TRIM_LENGTH;
   public static final int OUTPUT_NEURONS = GestureType.size();
@@ -59,11 +59,17 @@ public class GestureStore {
       
       int start = (jsonSensor.size() - TRIM_LENGTH) / 2;
       for (int i = 0; i < TRIM_LENGTH; i++) {
-        JSONObject jsonCoordinate = (JSONObject) jsonSensor.get(i + start);
-
-        input[i * 3] =     (double) jsonCoordinate.get("x");
-        input[i * 3 + 1] = (double) jsonCoordinate.get("y");
-        input[i * 3 + 2] = (double) jsonCoordinate.get("z");
+        if (jsonSensor.size() <= i+start) {
+            input[i * 3] =      0;
+            input[i * 3 + 1] =  0;
+            input[i * 3 + 2] =  0;
+        } else {
+            JSONObject jsonCoordinate = (JSONObject) jsonSensor.get(i + start);
+            
+            input[i * 3]     = Double.parseDouble(jsonCoordinate.get("x").toString());
+            input[i * 3 + 1] = Double.parseDouble(jsonCoordinate.get("y").toString());
+            input[i * 3 + 2] = Double.parseDouble(jsonCoordinate.get("z").toString());
+        }
       }      
     }
     
@@ -78,7 +84,7 @@ public class GestureStore {
       
       for (GestureType gestureType : GestureType.values()) {
         File directory = Paths.get(new File("").getAbsolutePath(), "data", dataType.name, gestureType.name).toFile();
-        File[] files = directory.listFiles((File dir, String name) -> !name.equals(".DS_STORE"));
+        File[] files = directory.listFiles((File dir, String name) -> !name.equals(".DS_Store"));
         
         for (File file : files) {
           this.gestures.get(dataType).add(new Gesture(readGestureFile(file), gestureType));

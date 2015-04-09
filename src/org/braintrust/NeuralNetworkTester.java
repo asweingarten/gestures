@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class NeuralNetworkTester {
   
-  public static final int TRAINING_SAMPLES = 5000;
+  public static final int TRAINING_SAMPLES = 15000;
   public static final int[] TOPOLOGY = new int[]{GestureStore.INPUT_NEURONS, 150, 150, 50, 50, GestureStore.OUTPUT_NEURONS};
   public static final double LEARNING_RATE = 0.7;
 

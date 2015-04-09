@@ -2,13 +2,23 @@ package org.braintrust;
 
 public enum GestureType {
 
-  CIRCLE("circle"),
   TRIANGLE("triangle"),
+  X("x"),
+  RECTANGLE("rectangle"),
+  CIRCLE("circle"),
   CHECK("check"),
+  CARET("caret"),
+  ZIGZAG("zigzag"),
   ARROW("arrow"),
-  PIGTAIL("pigtail"),
-  STAR("star");
-  
+  LEFT_SQUARE_BRACKET("leftSquareBracket"),
+  RIGHT_SQUARE_BRACKET("rightSquareBracket"),
+  V("v"),
+  DELETE("delete"),
+  LEFT_CURLY_BRACE("leftCurlyBrace"),
+  RIGHT_CURLY_BRACE("rightCurlyBrace"),
+  STAR("star"),
+  PIGTAIL("pigtail");
+
   public final String name;
   
   public static int size() {
